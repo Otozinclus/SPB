@@ -116,6 +116,8 @@ namespace SPB.Platform.WGL
                 pfd.PixelType = PixelType.PFD_TYPE_RGBA;
                 pfd.ColorBits = 24;
 
+                _opengl32Handle = NativeLibrary.Load("opengl32.dll");
+                
                 int res = SetPixelFormat(dummyWindowDC, ChoosePixelFormat(dummyWindowDC, ref pfd), ref pfd);
 
                 if (res == 0)
@@ -166,8 +168,6 @@ namespace SPB.Platform.WGL
 
                 ReleaseDC(dummyWindow, dummyWindowDC);
                 DestroyWindow(dummyWindow);
-
-                _opengl32Handle = NativeLibrary.Load("opengl32.dll");
 
                 _isInit = true;
             }
